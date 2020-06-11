@@ -3,9 +3,17 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class LuckyController
 {
+	/**
+	 * Generates a lucky (random) number
+	 * 
+	 * @Route("/lucky/number")
+	 * 
+	 * @return	Response	HTML-formatted string with result.
+	 */
 	public function number(): Response
 	{
 		$number = random_int(0, 100);
@@ -15,6 +23,13 @@ class LuckyController
 		);
 	}
 
+	/**
+	 * Picks a random name from an array.
+	 * 
+	 * @Route("/lucky/name")
+	 * 
+	 * @return	Response	HTML-formatted string with name.
+	 */
 	public function name(): Response
 	{
 		$names = array(
