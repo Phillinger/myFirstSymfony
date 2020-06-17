@@ -2,13 +2,13 @@
 
 namespace App\Controller\Api\Rest;
 
+use App\Controller\ApiController;
 use App\Entity\Articles;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class Article extends AbstractController
+class Article extends ApiController
 {
 	/**
 	 * Gets article data
@@ -22,22 +22,17 @@ class Article extends AbstractController
 	 */
 	public function get(string $id): JsonResponse
 	{
-		if ($id == -1)
+		if ($id == -1) {
 			return $this->get_last_ten();
+		}
 
-		// fetch data
-		$oArticle = $this->getDoctrine()->getRepository(Articles::class)->find($id);
+		$data = $this->getDoctrine()->getRepository(Articles::class)->find($id);
 
-		if (!$oArticle) {
+		if (!$data) {
 			throw $this->createNotFoundException('No article found for id '.$id);
 		}
 
-		echo '<pre>'; var_dump($oArticle); echo '</pre>';
-
-		$response = new JsonResponse();
-		$response->setData($oArticle);
-
-		return $response;
+		return JsonResponse::fromJsonString($this->getSerializer()->serialize($data, 'json'));
 	}
 
 
