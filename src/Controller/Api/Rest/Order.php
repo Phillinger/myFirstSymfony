@@ -3,29 +3,29 @@
 namespace App\Controller\Api\Rest;
 
 use App\Controller\ApiController;
-use App\Entity\Articles;
+use App\Entity\Orders;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-class Article extends ApiController
+class Order extends ApiController
 {
 	/**
-	 * Gets article data
+	 * Gets order data
 	 *
 	 * @Route(
-	 * 	"/api/rest/articles/{id<\d+>?-1}",
-	 * 	name="article_get",
+	 * 	"/api/rest/orders/{id<\d+>?-1}",
+	 * 	name="order_get",
 	 * 	methods={"GET"})
 	 *
-	 * @return	JsonResponse	JSON-formatted article data
+	 * @return	JsonResponse	JSON-formatted order data
 	 */
 	public function get(string $id): JsonResponse
 	{
 		if ($id == -1) {
-			$data = $this->getDoctrine()->getRepository(Articles::class)->findAll();
+			$data = $this->getDoctrine()->getRepository(Orders::class)->findAll();
 		} else {
-			$data = $this->getDoctrine()->getRepository(Articles::class)->find($id);
+			$data = $this->getDoctrine()->getRepository(Orders::class)->find($id);
 		}
 
 		if (!$data) {
