@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller\Api\Rest;
 
 use App\Entity\Articles;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +14,7 @@ class Article extends AbstractController
 	 * Gets article data
 	 *
 	 * @Route(
-	 * 	"/api/articles/{id<\d+>?-1}",
+	 * 	"/api/rest/articles/{id<\d+>?-1}",
 	 * 	name="article_get",
 	 * 	methods={"GET"})
 	 *
